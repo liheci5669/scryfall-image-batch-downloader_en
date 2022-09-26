@@ -1,0 +1,21 @@
+{
+  "name": "scryfall-image-batch-downloader",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.1.113",
+    "@windicss/plugin-animations": "^1.0.9",
+    "nuxt": "3.0.0-rc.8",
+    "nuxt-windicss": "^2.5.2",
+    "scryfall-sdk": "^3.2.1",
+    "unplugin-icons": "^0.14.10"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
+  }
+}
