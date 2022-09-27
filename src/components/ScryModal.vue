@@ -42,12 +42,12 @@
           <img
             :src="selectedCard.image_uris.large"
             :title="selectedCard.name"
-            class="inline-block p-4 max-h-[500px]"
+            class="inline-block p-4 max-h-[400px]"
           />
         </div>
         <div
           v-if="usingLangRef === 'ja' && !pendingJa"
-          class="grid grid-cols-4 gap-1 justify-center items-center p-3"
+          class="grid grid-cols-4 gap-1 justify-center items-center p-3 overflow-y-scroll h-[14rem]"
         >
           <div
             v-for="card in (searchedCardsJa as Scry.Card[])"
@@ -65,7 +65,7 @@
         </div>
         <div
           v-if="usingLangRef === 'en' && !pendingEn"
-          class="grid grid-cols-4 gap-1 justify-center items-center p-3"
+          class="grid grid-cols-4 gap-1 justify-center items-center p-3 overflow-y-scroll h-[12rem]"
         >
           <div
             v-for="card in (searchedCardsEn as Scry.Card[])"
@@ -117,7 +117,6 @@ const usingLangRef = ref<string>("ja");
 const { pending: pendingJa, data: searchedCardsJa } = await useLazyFetch(
   `/api/cards/search/prints?id=${selectedCard.value.oracle_id}&lang=ja`,
   {
-    method: "GET",
     initialCache: false,
   }
 );
@@ -125,7 +124,6 @@ const { pending: pendingJa, data: searchedCardsJa } = await useLazyFetch(
 const { pending: pendingEn, data: searchedCardsEn } = await useLazyFetch(
   `/api/cards/search/prints?id=${selectedCard.value.oracle_id}&lang=en`,
   {
-    method: "GET",
     initialCache: false,
   }
 );
