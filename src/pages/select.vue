@@ -1,15 +1,15 @@
 <template>
   <main>
     <div
-      v-if="!pending"
+      v-if="cards && !pending"
       class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-5 items-center justify-center m-4"
     >
       <ScryCard
-        v-for="card in result.cards"
+        v-for="card in cards"
         :key="card.id"
-        :card="card"
+        :card="(card as Readonly<Scry.Card>)"
         class="cursor-pointer"
-        @click="selectCard(card)"
+        @click="selectCard(card as Readonly<Scry.Card>)"
       />
     </div>
     <div v-else class="grid grid-cols-6 gap-5 items-center justify-center m-4">
@@ -50,7 +50,7 @@ const ScryCard = resolveComponent("ScryCard");
 const ScryModal = resolveComponent("ScryModal");
 const ExtendedFab = resolveComponent("form/button/ExtendedFab");
 
-const { cardNames, selectedCard, selectCard } = useCards();
+const { cards, cardNames, selectedCard, addCard, selectCard } = useCards();
 
 const { pending, data: result } = await useLazyFetch("/api/cards/byNames", {
   method: "POST",
@@ -58,6 +58,12 @@ const { pending, data: result } = await useLazyFetch("/api/cards/byNames", {
     cardNames: cardNames.value,
   },
   initialCache: false,
+});
+
+watch(result, () => {
+  result.value.cards.forEach((c) => {
+    addCard(c);
+  });
 });
 
 const isDisplayModalRef = computed(() => selectedCard.value !== undefined);

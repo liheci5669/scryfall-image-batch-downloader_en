@@ -38,32 +38,64 @@
           </button>
         </div>
         <!-- Modal body -->
-        <div class="flex justify-center">
+        <div class="flex justify-center border-b border-gray-200">
           <img
             :src="selectedCard.image_uris.large"
             :title="selectedCard.name"
             class="inline-block p-4 max-h-[500px]"
           />
         </div>
+        <div
+          v-if="usingLangRef === 'ja' && !pendingJa"
+          class="grid grid-cols-4 gap-1 justify-center items-center p-4"
+        >
+          <div
+            v-for="card in searchedCardsJa"
+            :key="(card as Scry.Card).id"
+            class="text-center"
+          >
+            <img
+              :src="(card as Scry.Card).image_uris.small"
+              :title="(card as Scry.Card).set"
+              class="inline-block cursor-pointer border-primary-500 border-4"
+              :class="[((card as Scry.Card).id === selectedCard.id) ? 'border' : 'border-none']"
+              @click="selectCard(card)"
+            />
+          </div>
+        </div>
+        <div
+          v-if="usingLangRef === 'en' && !pendingEn"
+          class="grid grid-cols-4 gap-1 justify-center items-center p-4"
+        >
+          <div
+            v-for="card in searchedCardsEn"
+            :key="(card as Scry.Card).id"
+            class="text-center"
+          >
+            <img
+              :src="(card as Scry.Card).image_uris.small"
+              :title="(card as Scry.Card).set"
+              class="inline-block cursor-pointer border-primary-500 border-4"
+              :class="[((card as Scry.Card).id === selectedCard.id) ? 'border' : 'border-none']"
+              @click="selectCard(card)"
+            />
+          </div>
+        </div>
         <!-- Modal footer -->
         <div
-          class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"
+          class="flex justify-between items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"
         >
-          <button
-            data-modal-toggle="defaultModal"
-            type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            I accept
-          </button>
-          <button
-            data-modal-toggle="defaultModal"
-            type="button"
-            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-            @click="unset"
-          >
-            Decline
-          </button>
+          <FilledButton class="flex items-center gap-1" @click="changeLang">
+            <IconLanguage color="currentColor" />
+            EN<IconSwapHorizRounded color="currentColor" />JP
+          </FilledButton>
+          <div class="flex items-center gap-2">
+            <OutlinedButton @click="unset">Cancel</OutlinedButton>
+            <FilledButton class="flex items-center gap-1" @click="changeCard">
+              <IconSwapVertRounded color="currentColor" />
+              Change Image
+            </FilledButton>
+          </div>
         </div>
       </div>
     </div>
@@ -71,8 +103,45 @@
 </template>
 <script setup lang="ts">
 import * as Scry from "scryfall-sdk";
+import IconLanguage from "~icons/material-symbols/language";
+import IconSwapHorizRounded from "~icons/material-symbols/swap-horiz-rounded";
+import IconSwapVertRounded from "~icons/material-symbols/swap-vert-rounded";
 
-const { selectedCard, selectCard } = useCards();
+const FilledButton = resolveComponent("form/button/FilledButton");
+const OutlinedButton = resolveComponent("form/button/OutlinedButton");
+
+const { selectedCard, selectCard, updateCardsWithSelectedCard } = useCards();
+
+const usingLangRef = ref<string>("ja");
+
+const { pending: pendingJa, data: searchedCardsJa } = await useLazyFetch(
+  `/api/cards/search/prints?id=${selectedCard.value.oracle_id}&lang=ja`,
+  {
+    method: "GET",
+    initialCache: false,
+  }
+);
+
+const { pending: pendingEn, data: searchedCardsEn } = await useLazyFetch(
+  `/api/cards/search/prints?id=${selectedCard.value.oracle_id}&lang=en`,
+  {
+    method: "GET",
+    initialCache: false,
+  }
+);
+
+const changeLang = () => {
+  if (usingLangRef.value === "ja") {
+    usingLangRef.value = "en";
+  } else {
+    usingLangRef.value = "ja";
+  }
+};
+
+const changeCard = () => {
+  updateCardsWithSelectedCard();
+  unset();
+};
 
 const unset = () => {
   selectCard(undefined);

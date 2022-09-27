@@ -10,18 +10,39 @@ export const useCards = () => {
   );
 
   const addCard = (cards: Ref<Scry.Card[]>) => (card: Scry.Card) => {
+    console.debug(card);
     cards.value.push(card);
+  };
+  const updateCard = (cards: Ref<Scry.Card[]>) => (card: Scry.Card) => {};
+  const updateCardsWithSelectedCard = (cards: Ref<Scry.Card[]>) => () => {
+    const index = cards.value.findIndex((c) => {
+      return c.oracle_id === selectedCard.value.oracle_id;
+    });
+
+    cards.value.splice(index, 1, selectedCard.value);
+  };
+  const updateCards = (cards: Ref<Scry.Card[]>) => (value: Scry.Card[]) => {
+    console.log(value);
+    cards.value = [...value];
   };
   const updateCardNames = (cardNames: Ref<string[]>) => (value: string[]) => {
     cardNames.value = [...value];
   };
-  const selectCard = (selectedCard: Ref<Scry.Card>) => (value: Scry.Card) => {
-    selectedCard.value = value;
-  };
+  const selectCard =
+    (selectedCard: Ref<Scry.Card>) => (value: Readonly<Scry.Card>) => {
+      if (value !== undefined) {
+        selectedCard.value = { ...value } as Scry.Card;
+      } else {
+        selectedCard.value = undefined;
+      }
+    };
 
   return {
     cards: readonly(cards),
     addCard: addCard(cards),
+    updateCard: updateCard(cards),
+    updateCardsWithSelectedCard: updateCardsWithSelectedCard(cards),
+    updateCards: updateCards(cards),
     cardNames: readonly(cardNames),
     updateCardNames: updateCardNames(cardNames),
     selectedCard: readonly(selectedCard),
