@@ -10,7 +10,6 @@ export const useCards = () => {
   );
 
   const addCard = (cards: Ref<Scry.Card[]>) => (card: Scry.Card) => {
-    console.debug(card);
     cards.value.push(card);
   };
   const updateCard = (cards: Ref<Scry.Card[]>) => (card: Scry.Card) => {};
@@ -22,7 +21,6 @@ export const useCards = () => {
     cards.value.splice(index, 1, selectedCard.value);
   };
   const updateCards = (cards: Ref<Scry.Card[]>) => (value: Scry.Card[]) => {
-    console.log(value);
     cards.value = [...value];
   };
   const updateCardNames = (cardNames: Ref<string[]>) => (value: string[]) => {

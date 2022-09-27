@@ -33,7 +33,7 @@
       </div>
     </div>
     <div v-if="!pending" class="flex justify-center mt-8">
-      <ExtendedFab class="flex items-center">
+      <ExtendedFab class="flex items-center" @click="download">
         <IconDownloadRounded color="#29535E" width="24" height="24" />
         <span class="font-bold">Download</span>
       </ExtendedFab>
@@ -67,4 +67,48 @@ watch(result, () => {
 });
 
 const isDisplayModalRef = computed(() => selectedCard.value !== undefined);
+
+const downloadImage = async (imageSrc) => {
+  try {
+    // fetchで画像データを取得
+    const image = await fetch(imageSrc);
+    const imageBlob = await image.blob();
+    const imageURL = URL.createObjectURL(imageBlob);
+
+    // 拡張子取得
+    const mimeTypeArray = imageBlob.type.split("/");
+    const extension = mimeTypeArray[1];
+
+    // ダウンロード
+    const link = document.createElement("a");
+    link.href = imageURL;
+    link.download = `fileName.${extension}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (error) {
+    throw new Error(`${error}. Image src: ${imageSrc}`);
+  }
+};
+
+const download = async () => {
+  for (const card of cards.value) {
+    const result = await useAsyncData(card.id, () =>
+      $fetch("/api/download", {
+        method: "POST",
+        body: {
+          url: card.image_uris.large,
+        },
+        initialCache: false,
+        responseType: "blob",
+      })
+    );
+
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(result.data.value as Blob);
+    link.setAttribute("download", `${card.name}.png`);
+    document.body.appendChild(link);
+    link.click();
+  }
+};
 </script>
