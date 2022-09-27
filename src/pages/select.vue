@@ -50,7 +50,7 @@ const ScryCard = resolveComponent("ScryCard");
 const ScryModal = resolveComponent("ScryModal");
 const ExtendedFab = resolveComponent("form/button/ExtendedFab");
 
-const { cards, cardNames, selectedCard, addCard, selectCard } = useCards();
+const { cards, cardNames, selectedCard, updateCards, selectCard } = useCards();
 
 const { pending, data: result } = await useLazyFetch("/api/cards/byNames", {
   method: "POST",
@@ -61,9 +61,7 @@ const { pending, data: result } = await useLazyFetch("/api/cards/byNames", {
 });
 
 watch(result, () => {
-  result.value.cards.forEach((c) => {
-    addCard(c);
-  });
+  updateCards(result.value.cards);
 });
 
 const isDisplayModalRef = computed(() => selectedCard.value !== undefined);
