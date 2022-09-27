@@ -1,6 +1,16 @@
 <template>
   <main>
     <div
+      v-if="!pending && result.errorCardNames.length !== 0"
+      class="flex items-center justify-center"
+    >
+      <WarningAlert
+        text="以下のファイルがダウンロードできませんでした。"
+        class="my-8 mx-2"
+        :list="result.errorCardNames"
+      />
+    </div>
+    <div
       v-if="cards && !pending"
       class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-5 items-center justify-center m-4"
     >
@@ -49,6 +59,7 @@ import IconDownloadRounded from "~icons/material-symbols/download-rounded";
 const ScryCard = resolveComponent("ScryCard");
 const ScryModal = resolveComponent("ScryModal");
 const ExtendedFab = resolveComponent("form/button/ExtendedFab");
+const WarningAlert = resolveComponent("util/WarningAlert");
 
 const { cards, cardNames, selectedCard, updateCards, selectCard } = useCards();
 

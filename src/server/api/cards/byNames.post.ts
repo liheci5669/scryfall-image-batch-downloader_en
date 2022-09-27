@@ -11,16 +11,15 @@ export default defineEventHandler(async (event) => {
   for (const name of cardNames) {
     console.log(`Fetching: ${name}`);
 
-    const card = await Scry.Cards.byName(name);
-    if (card) {
+    try {
+      const card = await Scry.Cards.byName(name);
+      if (!card.image_uris) throw new Error();
       cards.push(card);
       console.log(`Fetched: ${name}`);
-    } else {
+    } catch (e) {
       errorCardNames.push(name);
       console.error(`Failed: ${name}`);
     }
-
-    await new Promise((resolve) => setTimeout(resolve, 100));
   }
 
   for (const card of cards) {
@@ -34,6 +33,9 @@ export default defineEventHandler(async (event) => {
         parseInt(card.collector_number),
         "ja"
       );
+
+      if (!jaCard.image_uris) throw new Error();
+
       jaCards.push(jaCard);
       console.log(`Found: ${jaCard.name}`);
     } catch (e) {
