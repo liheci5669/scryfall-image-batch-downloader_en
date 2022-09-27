@@ -66,29 +66,6 @@ watch(result, () => {
 
 const isDisplayModalRef = computed(() => selectedCard.value !== undefined);
 
-const downloadImage = async (imageSrc) => {
-  try {
-    // fetchで画像データを取得
-    const image = await fetch(imageSrc);
-    const imageBlob = await image.blob();
-    const imageURL = URL.createObjectURL(imageBlob);
-
-    // 拡張子取得
-    const mimeTypeArray = imageBlob.type.split("/");
-    const extension = mimeTypeArray[1];
-
-    // ダウンロード
-    const link = document.createElement("a");
-    link.href = imageURL;
-    link.download = `fileName.${extension}`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  } catch (error) {
-    throw new Error(`${error}. Image src: ${imageSrc}`);
-  }
-};
-
 const download = async () => {
   for (const card of cards.value) {
     const result = await useAsyncData(card.id, () =>

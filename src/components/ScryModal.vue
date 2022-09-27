@@ -47,43 +47,43 @@
         </div>
         <div
           v-if="usingLangRef === 'ja' && !pendingJa"
-          class="grid grid-cols-4 gap-1 justify-center items-center p-4"
+          class="grid grid-cols-4 gap-1 justify-center items-center p-3"
         >
           <div
-            v-for="card in searchedCardsJa"
-            :key="(card as Scry.Card).id"
-            class="text-center"
+            v-for="card in (searchedCardsJa as Scry.Card[])"
+            :key="card.id"
+            class="text-center cursor-pointe"
+            :class="[card.id === selectedCard.id ? 'bg-primary-300' : '']"
+            @click="selectCard(card)"
           >
             <img
               :src="(card as Scry.Card).image_uris.small"
-              :title="(card as Scry.Card).set"
-              class="inline-block cursor-pointer border-primary-500 border-4"
-              :class="[((card as Scry.Card).id === selectedCard.id) ? 'border' : 'border-none']"
-              @click="selectCard(card)"
+              :title="card.set"
+              class="inline-block p-1"
             />
           </div>
         </div>
         <div
           v-if="usingLangRef === 'en' && !pendingEn"
-          class="grid grid-cols-4 gap-1 justify-center items-center p-4"
+          class="grid grid-cols-4 gap-1 justify-center items-center p-3"
         >
           <div
-            v-for="card in searchedCardsEn"
-            :key="(card as Scry.Card).id"
-            class="text-center"
+            v-for="card in (searchedCardsEn as Scry.Card[])"
+            :key="card.id"
+            class="text-center cursor-pointe"
+            :class="[card.id === selectedCard.id ? 'bg-primary-300' : '']"
+            @click="selectCard(card)"
           >
             <img
               :src="(card as Scry.Card).image_uris.small"
-              :title="(card as Scry.Card).set"
-              class="inline-block cursor-pointer border-primary-500 border-4"
-              :class="[((card as Scry.Card).id === selectedCard.id) ? 'border' : 'border-none']"
-              @click="selectCard(card)"
+              :title="card.set"
+              class="inline-block p-1"
             />
           </div>
         </div>
         <!-- Modal footer -->
         <div
-          class="flex justify-between items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"
+          class="flex flex-col md:flex-row md:justify-between items-center gap-3 p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"
         >
           <FilledButton class="flex items-center gap-1" @click="changeLang">
             <IconLanguage color="currentColor" />
