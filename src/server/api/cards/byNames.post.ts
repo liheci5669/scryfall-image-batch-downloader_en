@@ -39,8 +39,6 @@ export default defineEventHandler(async (event) => {
     } catch (e) {
       jaCards.push(card);
       console.log(`Not Found: ${card.name}`);
-    } finally {
-      await new Promise((resolve) => setTimeout(resolve, 100));
     }
   }
 
