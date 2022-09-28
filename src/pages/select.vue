@@ -1,17 +1,22 @@
 <template>
   <main>
+    <div v-if="isLoadingRef" class="flex items-center justify-center">
+      <InfoAlert
+        :text="`Now Loading: ${cards.length} / ${cardNames.length}`"
+        class="my-8 mx-2"
+      />
+    </div>
     <div
-      v-if="!pending && result.errorCardNames.length !== 0"
+      v-if="cards.length !== 0 && errorCardNames.length !== 0"
       class="flex items-center justify-center"
     >
       <WarningAlert
         text="以下のファイルがダウンロードできませんでした。"
         class="my-8 mx-2"
-        :list="result.errorCardNames"
       />
     </div>
     <div
-      v-if="cards && !pending"
+      v-if="cards.length !== 0"
       class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-5 items-center justify-center m-4"
     >
       <ScryCard
@@ -42,7 +47,7 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <div v-if="!pending" class="flex justify-center mt-8">
+    <div v-if="cards.length !== 0" class="flex justify-center mt-8">
       <ExtendedFab class="flex items-center" @click="download">
         <IconDownloadRounded color="#29535E" width="24" height="24" />
         <span class="font-bold">Download</span>
@@ -59,23 +64,31 @@ import IconDownloadRounded from "~icons/material-symbols/download-rounded";
 const ScryCard = resolveComponent("ScryCard");
 const ScryModal = resolveComponent("ScryModal");
 const ExtendedFab = resolveComponent("form/button/ExtendedFab");
+const InfoAlert = resolveComponent("util/InfoAlert");
 const WarningAlert = resolveComponent("util/WarningAlert");
 
-const { cards, cardNames, selectedCard, updateCards, selectCard } = useCards();
+const { cards, cardNames, selectedCard, addCard, updateCards, selectCard } =
+  useCards();
 
-const { pending, data: result } = await useLazyFetch("/api/cards/byNames", {
-  method: "POST",
-  body: {
-    cardNames: cardNames.value,
-  },
-  initialCache: false,
-});
-
-watch(result, () => {
-  updateCards(result.value.cards);
-});
-
+const errorCardNames = ref<string[]>([]);
 const isDisplayModalRef = computed(() => selectedCard.value !== undefined);
+const isLoadingRef = ref<boolean>(true);
+
+onMounted(async () => {
+  isLoadingRef.value = true;
+  for (const name of cardNames.value) {
+    try {
+      const { data: card } = await useFetch(`/api/cards/byName?name=${name}`, {
+        initialCache: false,
+      });
+
+      addCard(card.value as Scry.Card);
+    } catch {
+      errorCardNames.value.push(name);
+    }
+  }
+  isLoadingRef.value = false;
+});
 
 const download = async () => {
   for (const card of cards.value) {
@@ -97,4 +110,8 @@ const download = async () => {
     link.click();
   }
 };
+
+onUnmounted(() => {
+  updateCards([]);
+});
 </script>
