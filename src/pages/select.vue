@@ -106,13 +106,21 @@ onUnmounted(() => {
   updateCards([]);
 });
 
+const getImageUris = (card: Scry.Card) => {
+  if (card.card_faces.length >= 2 && card.card_faces[0].image_uris) {
+    return card.card_faces[0].image_uris;
+  } else if (card.image_uris) {
+    return card.image_uris;
+  }
+};
+
 const download = async () => {
   for (const card of cards.value) {
     const result = await useAsyncData(card.id, () =>
       $fetch("/api/download", {
         method: "POST",
         body: {
-          url: card.image_uris.large,
+          url: getImageUris(card as Scry.Card).large,
         },
         initialCache: false,
         responseType: "blob",
