@@ -1,43 +1,48 @@
 <template>
   <main>
-    <div v-if="isLoadingRef" class="flex items-center justify-center">
+    <transition-group
+      enter-active-class="animate-animated animate-bounceIn"
+      move-class="animate-animated"
+      class="flex items-center justify-center"
+      tag="div"
+    >
       <SibdAlert
+        v-if="isLoadingRef"
         :text="`Now Loading: ${cards.length} / ${cardNames.length}`"
         type="info"
         class="my-8 mx-2"
+        key="isLoading"
       />
-    </div>
-    <div
-      v-if="!isLoadingRef && errorCardNames.length === 0"
-      class="flex items-center justify-center"
-    >
       <SibdAlert
+        v-if="!isLoadingRef && errorCardNames.length === 0"
         :text="`Loading Complete: ${cards.length}`"
         type="success"
         class="my-8 mx-2"
+        key="isSuccess"
       />
-    </div>
-    <div
-      v-if="cards.length !== 0 && errorCardNames.length !== 0"
-      class="flex items-center justify-center"
-    >
       <SibdAlert
+        v-if="cards.length !== 0 && errorCardNames.length !== 0"
         text="以下のファイルがダウンロードできませんでした。"
         type="warning"
         class="my-8 mx-2"
+        key="isNotDownloaded"
       />
-    </div>
+    </transition-group>
     <div
       v-if="cards.length !== 0"
       class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-5 items-center justify-center m-4"
     >
-      <ScryCard
-        v-for="card in cards"
-        :key="card.id"
-        :card="(card as Readonly<Scry.Card>)"
-        class="cursor-pointer"
-        @click="selectCard(card as Readonly<Scry.Card>)"
-      />
+      <transition-group
+        enter-active-class="animate-animated animate-fadeInLeft"
+      >
+        <ScryCard
+          v-for="card in cards"
+          :key="card.id"
+          :card="(card as Readonly<Scry.Card>)"
+          class="cursor-pointer"
+          @click="selectCard(card as Readonly<Scry.Card>)"
+        />
+      </transition-group>
     </div>
     <div v-else class="grid grid-cols-6 gap-5 items-center justify-center m-4">
       <div role="status">
