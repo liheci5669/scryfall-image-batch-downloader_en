@@ -83,11 +83,16 @@ onMounted(async () => {
       });
 
       addCard(card.value as Scry.Card);
-    } catch {
+    } catch (e) {
+      console.log(e);
       errorCardNames.value.push(name);
     }
   }
   isLoadingRef.value = false;
+});
+
+onUnmounted(() => {
+  updateCards([]);
 });
 
 const download = async () => {
@@ -110,8 +115,4 @@ const download = async () => {
     link.click();
   }
 };
-
-onUnmounted(() => {
-  updateCards([]);
-});
 </script>

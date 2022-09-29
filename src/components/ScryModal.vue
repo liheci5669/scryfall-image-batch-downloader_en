@@ -40,7 +40,7 @@
         <!-- Modal body -->
         <div class="flex justify-center border-b border-gray-200">
           <img
-            :src="selectedCard.image_uris.large"
+            :src="getImageUris(selectedCard as Scry.Card).large"
             :title="selectedCard.name"
             class="inline-block p-4 max-h-[400px]"
           />
@@ -57,7 +57,7 @@
             @click="selectCard(card)"
           >
             <img
-              :src="(card as Scry.Card).image_uris.small"
+              :src="getImageUris(card as Scry.Card).small"
               :title="card.set"
               class="inline-block p-1"
             />
@@ -75,7 +75,7 @@
             @click="selectCard(card)"
           >
             <img
-              :src="(card as Scry.Card).image_uris.small"
+              :src="getImageUris(card as Scry.Card).small"
               :title="card.set"
               class="inline-block p-1"
             />
@@ -143,5 +143,13 @@ const changeCard = () => {
 
 const unset = () => {
   selectCard(undefined);
+};
+
+const getImageUris = (card: Scry.Card) => {
+  if (card.card_faces.length >= 2 && card.card_faces[0].image_uris) {
+    return card.card_faces[0].image_uris;
+  } else if (card.image_uris) {
+    return card.image_uris;
+  }
 };
 </script>
