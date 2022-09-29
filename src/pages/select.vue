@@ -1,8 +1,19 @@
 <template>
   <main>
     <div v-if="isLoadingRef" class="flex items-center justify-center">
-      <InfoAlert
+      <SibdAlert
         :text="`Now Loading: ${cards.length} / ${cardNames.length}`"
+        type="info"
+        class="my-8 mx-2"
+      />
+    </div>
+    <div
+      v-if="!isLoadingRef && errorCardNames.length === 0"
+      class="flex items-center justify-center"
+    >
+      <SibdAlert
+        :text="`Loading Complete: ${cards.length}`"
+        type="success"
         class="my-8 mx-2"
       />
     </div>
@@ -10,8 +21,9 @@
       v-if="cards.length !== 0 && errorCardNames.length !== 0"
       class="flex items-center justify-center"
     >
-      <WarningAlert
+      <SibdAlert
         text="以下のファイルがダウンロードできませんでした。"
+        type="warning"
         class="my-8 mx-2"
       />
     </div>
@@ -64,8 +76,7 @@ import IconDownloadRounded from "~icons/material-symbols/download-rounded";
 const ScryCard = resolveComponent("ScryCard");
 const ScryModal = resolveComponent("ScryModal");
 const ExtendedFab = resolveComponent("form/button/ExtendedFab");
-const InfoAlert = resolveComponent("util/InfoAlert");
-const WarningAlert = resolveComponent("util/WarningAlert");
+const SibdAlert = resolveComponent("util/SibdAlert");
 
 const { cards, cardNames, selectedCard, addCard, updateCards, selectCard } =
   useCards();

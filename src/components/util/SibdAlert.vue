@@ -1,6 +1,7 @@
 <template>
   <div
     class="flex p-4 text-sm text-blue-700 bg-blue-100 rounded-lg shadow dark:bg-blue-200 dark:text-blue-800"
+    :class="color"
     role="alert"
   >
     <svg
@@ -30,5 +31,20 @@ const props = defineProps<{
   title?: string;
   text: string;
   list?: string[];
+  type: string;
 }>();
+
+const color = computed(() => {
+  if (props.type === "info") {
+    return "text-blue-700 bg-blue-100 dark:bg-blue-200 dark:text-blue-800";
+  } else if (props.type === "warning") {
+    return "text-yellow-700 bg-yellow-100 dark:bg-yellow-200 dark:text-yellow-800";
+  } else if (props.type === "error") {
+    return "text-red-700 bg-red-100 dark:bg-red-200 dark:text-red-800";
+  } else if (props.type === "success") {
+    return "text-green-700 bg-green-100 dark:bg-green-200 dark:text-green-800";
+  } else {
+    return "text-blue-700 bg-blue-100 dark:bg-blue-200 dark:text-blue-800";
+  }
+});
 </script>
