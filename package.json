@@ -11,7 +11,7 @@
     "@iconify/json": "^2.1.115",
     "@types/got": "^9.6.12",
     "@windicss/plugin-animations": "^1.0.9",
-    "got": "^11.8.2",
+    "got": "^12.5.1",
     "nuxt": "^3.0.0-rc.11",
     "nuxt-windicss": "^2.5.2",
     "scryfall-sdk": "^3.2.1",
