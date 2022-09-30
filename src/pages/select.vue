@@ -89,6 +89,7 @@ const isLoadingRef = ref<boolean>(true);
 
 onMounted(async () => {
   isLoadingRef.value = true;
+  updateCards([]);
   for (const name of cardNames.value) {
     try {
       const { data: card } = await useFetch(`/api/cards/byName?name=${name}`, {
@@ -102,10 +103,6 @@ onMounted(async () => {
     }
   }
   isLoadingRef.value = false;
-});
-
-onUnmounted(() => {
-  updateCards([]);
 });
 
 const getImageUris = (card: Scry.Card) => {

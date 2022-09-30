@@ -25,12 +25,20 @@
 </template>
 
 <script setup lang="ts">
+import * as Scry from "scryfall-sdk";
 import ImageSearchRounded from "~icons/material-symbols/image-search-rounded";
 
 const SibdTextarea = resolveComponent("form/SibdTextarea");
 const FilledButton = resolveComponent("form/button/FilledButton");
 
-const { updateCardNames } = useCards();
+const { cards, updateCardNames } = useCards();
+
+onMounted(() => {
+  if (cards && cards.value.length !== 0) {
+    const names = (cards.value as Scry.Card[]).map((c) => c.name);
+    cardsStringRef.value = "1 " + names.join("\n1 ");
+  }
+});
 
 const cardsStringRef = ref<string>(
   "1 Kenrith, the Returned King\n1 Archivist of Oghma"
