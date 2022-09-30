@@ -28,21 +28,18 @@
         key="isNotDownloaded"
       />
     </transition-group>
+
     <div
       v-if="cards.length !== 0"
       class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-5 items-center justify-center m-4"
     >
-      <transition-group
-        enter-active-class="animate-animated animate-fadeInLeft"
-      >
-        <ScryCard
-          v-for="card in cards"
-          :key="card.id"
-          :card="(card as Readonly<Scry.Card>)"
-          class="cursor-pointer"
-          @click="selectCard(card as Readonly<Scry.Card>)"
-        />
-      </transition-group>
+      <ScryCard
+        v-for="card in cards"
+        :key="card.id"
+        :card="(card as Readonly<Scry.Card>)"
+        class="cursor-pointer"
+        @click="selectCard(card as Readonly<Scry.Card>)"
+      />
     </div>
     <div v-else class="grid grid-cols-6 gap-5 items-center justify-center m-4">
       <div role="status">
