@@ -47,7 +47,10 @@
         <span class="font-bold">Download</span>
       </ExtendedFab>
     </div>
-    <transition enter-active-class="animate-animated animate-fadeIn">
+    <transition
+      enter-active-class="animate-animated animate-fadeIn"
+      leave-active-class="animate-animated animate-fadeOut"
+    >
       <ScryModal v-if="isDisplayModalRef" />
     </transition>
   </main>

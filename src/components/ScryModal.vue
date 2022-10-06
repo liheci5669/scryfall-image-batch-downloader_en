@@ -45,38 +45,18 @@
             class="inline-block p-4 max-h-[400px]"
           />
         </div>
-        <div
+        <CardList
           v-if="usingLangRef === 'ja' && !pendingJa"
-          class="grid grid-cols-4 gap-1 justify-center items-center p-3 overflow-y-scroll h-60"
-        >
-          <div
-            v-for="card in (searchedCardsJa as Scry.Card[])"
-            :key="card.id"
-            class="text-center cursor-pointe"
-            :class="[
-              card.id === selectedCard.id ? 'opacity-100' : 'opacity-50',
-            ]"
-            @click="selectCard(card)"
-          >
-            <ScryCard :card="card" />
-          </div>
-        </div>
-        <div
+          :cards="searchedCardsJa"
+          :selectedCard="selectedCard"
+          @selectCard="selectCard"
+        />
+        <CardList
           v-else-if="usingLangRef === 'en' && !pendingEn"
-          class="grid grid-cols-4 gap-1 justify-center items-center p-3 overflow-y-scroll h-60"
-        >
-          <div
-            v-for="card in (searchedCardsEn as Scry.Card[])"
-            :key="card.id"
-            class="text-center cursor-pointe"
-            :class="[
-              card.id === selectedCard.id ? 'opacity-100' : 'opacity-50',
-            ]"
-            @click="selectCard(card)"
-          >
-            <ScryCard :card="card" />
-          </div>
-        </div>
+          :cards="searchedCardsEn"
+          :selectedCard="selectedCard"
+          @selectCard="selectCard"
+        />
         <div v-else class="flex items-center justify-center h-60">
           <ScryLoading />
         </div>
@@ -108,6 +88,7 @@ import IconSwapVertRounded from "~icons/material-symbols/swap-vert-rounded";
 
 const ScryCard = resolveComponent("ScryCard");
 const ScryLoading = resolveComponent("ScryLoading");
+const CardList = resolveComponent("modal/CardList");
 const FilledButton = resolveComponent("form/button/FilledButton");
 const OutlinedButton = resolveComponent("form/button/OutlinedButton");
 
