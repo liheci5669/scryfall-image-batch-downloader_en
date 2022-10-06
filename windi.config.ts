@@ -56,8 +56,8 @@ export default defineConfig({
     require("windicss/plugin/forms"),
     require("@windicss/plugin-animations")({
       settings: {
-        animatedSpeed: 500,
-        animationDelaySpeed: 1000,
+        animatedSpeed: 300,
+        animationDelaySpeed: 300,
       },
     }),
   ],
