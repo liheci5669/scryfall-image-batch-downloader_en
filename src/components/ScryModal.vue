@@ -47,39 +47,38 @@
         </div>
         <div
           v-if="usingLangRef === 'ja' && !pendingJa"
-          class="grid grid-cols-4 gap-1 justify-center items-center p-3 overflow-y-scroll h-[14rem]"
+          class="grid grid-cols-4 gap-1 justify-center items-center p-3 overflow-y-scroll h-60"
         >
           <div
             v-for="card in (searchedCardsJa as Scry.Card[])"
             :key="card.id"
             class="text-center cursor-pointe"
-            :class="[card.id === selectedCard.id ? 'bg-primary-300' : '']"
+            :class="[
+              card.id === selectedCard.id ? 'opacity-100' : 'opacity-50',
+            ]"
             @click="selectCard(card)"
           >
-            <img
-              :src="getImageUris(card as Scry.Card).small"
-              :title="card.set"
-              class="inline-block p-1"
-            />
+            <ScryCard :card="card" />
           </div>
         </div>
         <div
-          v-if="usingLangRef === 'en' && !pendingEn"
-          class="grid grid-cols-4 gap-1 justify-center items-center p-3 overflow-y-scroll h-[12rem]"
+          v-else-if="usingLangRef === 'en' && !pendingEn"
+          class="grid grid-cols-4 gap-1 justify-center items-center p-3 overflow-y-scroll h-60"
         >
           <div
             v-for="card in (searchedCardsEn as Scry.Card[])"
             :key="card.id"
             class="text-center cursor-pointe"
-            :class="[card.id === selectedCard.id ? 'bg-primary-300' : '']"
+            :class="[
+              card.id === selectedCard.id ? 'opacity-100' : 'opacity-50',
+            ]"
             @click="selectCard(card)"
           >
-            <img
-              :src="getImageUris(card as Scry.Card).small"
-              :title="card.set"
-              class="inline-block p-1"
-            />
+            <ScryCard :card="card" />
           </div>
+        </div>
+        <div v-else class="flex items-center justify-center h-60">
+          <ScryLoading />
         </div>
         <!-- Modal footer -->
         <div
@@ -107,6 +106,8 @@ import IconLanguage from "~icons/material-symbols/language";
 import IconSwapHorizRounded from "~icons/material-symbols/swap-horiz-rounded";
 import IconSwapVertRounded from "~icons/material-symbols/swap-vert-rounded";
 
+const ScryCard = resolveComponent("ScryCard");
+const ScryLoading = resolveComponent("ScryLoading");
 const FilledButton = resolveComponent("form/button/FilledButton");
 const OutlinedButton = resolveComponent("form/button/OutlinedButton");
 

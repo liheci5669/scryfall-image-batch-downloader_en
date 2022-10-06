@@ -1,17 +1,22 @@
 <template>
-  <transition enter-active-class="animate-animated animate-fadeInLeft">
-    <section v-show="!isLoadingRef">
-      <img
-        :src="getImageUris(card as Scry.Card).large"
-        :title="card.name"
-        @load="isLoadingRef = false"
+  <section>
+    <transition enter-active-class="animate-animated animate-fadeInLeft">
+      <div v-show="!isLoadingRef">
+        <img
+          :src="getImageUris(card as Scry.Card).large"
+          :title="card.name"
+          @load="isLoadingRef = false"
           @click="emit('click')"
-      />
-    </section>
-  </transition>
+        />
+      </div>
+    </transition>
+    <ScryLoading v-show="isLoadingRef" />
+  </section>
 </template>
 <script setup lang="ts">
 import * as Scry from "scryfall-sdk";
+
+const ScryLoading = resolveComponent("ScryLoading");
 
 const isLoadingRef = ref<boolean>(true);
 
