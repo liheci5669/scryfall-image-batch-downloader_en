@@ -8,25 +8,31 @@
     >
       <SibdAlert
         v-if="isLoadingRef"
-        :text="`Now Loading: ${cards.length} / ${cardNames.length}`"
         type="info"
         class="my-8 mx-2"
         key="isLoading"
-      />
+      >
+        <p>Now Loading: {{ cards.length }} / {{ cardNames.length }}</p>
+      </SibdAlert>
       <SibdAlert
         v-if="!isLoadingRef && errorCardNames.length === 0"
-        :text="`Loading Complete: ${cards.length}`"
         type="success"
         class="my-8 mx-2"
         key="isSuccess"
-      />
+      >
+        <p>Loading Complete: {{ cards.length }}</p>
+      </SibdAlert>
       <SibdAlert
         v-if="cards.length !== 0 && errorCardNames.length !== 0"
-        text="以下のファイルがダウンロードできませんでした。"
         type="warning"
         class="my-8 mx-2"
         key="isNotDownloaded"
-      />
+      >
+        <p>以下のファイルがダウンロードできませんでした。</p>
+        <ul class="mt-2 list-dic">
+          <li></li>
+        </ul>
+      </SibdAlert>
     </transition-group>
 
     <div

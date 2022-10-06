@@ -19,18 +19,13 @@
     </svg>
     <span class="sr-only">Info</span>
     <div>
-      <span v-if="title" class="font-medium">{{ title }}</span> {{ text }}
-      <ul v-if="list" class="mt-2 list-disc">
-        <li v-for="item in list">{{ item }}</li>
-      </ul>
+      <slot></slot>
     </div>
   </div>
 </template>
 <script setup lang="ts">
 const props = defineProps<{
   title?: string;
-  text: string;
-  list?: string[];
   type: string;
 }>();
 
