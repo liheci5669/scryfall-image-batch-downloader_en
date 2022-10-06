@@ -5,6 +5,7 @@
         :src="getImageUris(card as Scry.Card).large"
         :title="card.name"
         @load="isLoadingRef = false"
+          @click="emit('click')"
       />
     </section>
   </transition>
@@ -25,4 +26,8 @@ const getImageUris = (card: Scry.Card) => {
     return card.image_uris;
   }
 };
+
+const emit = defineEmits<{
+  (e: "click");
+}>();
 </script>
