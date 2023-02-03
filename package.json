@@ -14,7 +14,7 @@
     "got": "^11.8.6",
     "nuxt": "^3.0.0-rc.13",
     "nuxt-windicss": "^2.5.3",
-    "scryfall-sdk": "^3.2.1",
+    "scryfall-sdk": "^3.3.0",
     "unplugin-icons": "^0.15.1"
   },
   "dependencies": {}
