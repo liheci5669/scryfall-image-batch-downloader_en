@@ -17,5 +17,9 @@
     "scryfall-sdk": "^3.3.0",
     "unplugin-icons": "^0.15.2"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "resolutions": {
+    "loader-utils": "^2.0.4",
+    "json5": "^2.2.2"
+  }
 }
