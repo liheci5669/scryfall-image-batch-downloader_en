@@ -589,10 +589,10 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.17.7.tgz#03b231fcfa0702562978979468dfc8b09b55ac59"
   integrity sha512-K9/YybM6WZO71x73Iyab6mwieHtHjm9hrPR/a9FBPZmFO3w+fJaM2uu2rt3JYf/rZR24MFwTliI8VSoKKOtYtg==
 
-"@iconify/json@^2.2.39":
-  version "2.2.39"
-  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-2.2.39.tgz#4b17d361703df15e3bcb90093a89e66884949dac"
-  integrity sha512-LlEejR9fv8PIpww3HUl8nbVJ4a89Q3Ydcp5W5Cwj/vhP7ergmzGemXizlqs7kGPRYUORZnjKGZkt32oW423icw==
+"@iconify/json@^2.2.66":
+  version "2.2.66"
+  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-2.2.66.tgz#53d5302580d719296561445038112e80b5941169"
+  integrity sha512-1pt0wK1exw5HhgkevwXNBOwpeUmPaUd8ahfi2koE1nPklOmHUPm4516jFQ3bjVm3sFhVzR2sRJGbTXqM2iqKbA==
   dependencies:
     "@iconify/types" "*"
     pathe "^1.0.0"
