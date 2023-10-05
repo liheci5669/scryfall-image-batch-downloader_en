@@ -1,7 +1,7 @@
 import * as Scry from "scryfall-sdk";
 
 export default defineEventHandler(async (event) => {
-  const body = await useBody(event);
+  const body = await readBody(event);
   const cardNames = body.cardNames as string[];
 
   const cards: Scry.Card[] = [];
