@@ -3,7 +3,7 @@
     <transition enter-active-class="animate-animated animate-fadeInLeft">
       <div v-show="!isLoadingRef">
         <img
-          :src="getImageUris(card as Scry.Card).large"
+          :src="getImageUris(card as Scry.Card)?.large"
           :title="card.name"
           @load="isLoadingRef = false"
           @click="emit('click')"
@@ -29,6 +29,8 @@ const getImageUris = (card: Scry.Card) => {
     return card.card_faces[0].image_uris;
   } else if (card.image_uris) {
     return card.image_uris;
+  } else {
+    return null;
   }
 };
 
