@@ -98,9 +98,7 @@ onMounted(async () => {
   updateCards([]);
   for (const name of cardNames.value) {
     try {
-      const { data: card } = await useFetch(`/api/cards/byName?name=${name}`, {
-        initialCache: false,
-      });
+      const { data: card } = await useFetch(`/api/cards/byName?name=${name}`);
 
       addCard(card.value as Scry.Card);
     } catch (e) {
