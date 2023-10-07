@@ -15,8 +15,6 @@ const description = ref(
 
 useHead({
   title,
-  viewport: "width=device-width, initial-scale=1",
-  charset: "utf-8",
   htmlAttrs: {
     lang: "ja",
     prefix: "og: http://ogp.me/ns#",
