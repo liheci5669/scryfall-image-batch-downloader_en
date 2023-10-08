@@ -9,15 +9,14 @@
   },
   "devDependencies": {
     "@iconify/json": "^2.2.121",
+    "@nuxt/ui": "^2.9.0",
     "@types/got": "^9.6.12",
     "@windicss/plugin-animations": "^1.0.9",
     "got": "^13.0.0",
     "nuxt": "^3.7.4",
-    "nuxt-windicss": "^2.6.1",
     "scryfall-sdk": "^4.1.1",
     "unplugin-icons": "^0.17.0"
   },
-  "dependencies": {},
   "resolutions": {
     "loader-utils": "^2.0.4",
     "json5": "^2.2.2"

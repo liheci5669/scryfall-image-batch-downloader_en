@@ -13,7 +13,7 @@
       <div class="flex text-right text-white font-bold">
         <nuxt-link
           to="https://github.com/kintsuba/scryfall-image-batch-downloader"
-          class="p-2 flex items-center hover:bg-primary-700"
+          class="p-2 flex items-center hover:bg-primary-600"
         >
           <IconGitHub color="currentcolor" width="28" height="28" />
           <span class="pl-1 text-lg hidden md:inline"> Repository </span>
