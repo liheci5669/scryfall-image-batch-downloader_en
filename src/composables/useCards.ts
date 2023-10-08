@@ -4,7 +4,7 @@ import * as Scry from "scryfall-sdk";
 export const useCards = () => {
   const cards: Ref<Scry.Card[]> = useState("cards", () => []);
   const cardNames: Ref<string[]> = useState("cardNames", () => []);
-  const selectedCard: Ref<Scry.Card> = useState(
+  const selectedCard: Ref<Scry.Card | undefined> = useState(
     "selectedCard",
     () => undefined
   );
@@ -15,10 +15,10 @@ export const useCards = () => {
   const updateCard = (cards: Ref<Scry.Card[]>) => (card: Scry.Card) => {};
   const updateCardsWithSelectedCard = (cards: Ref<Scry.Card[]>) => () => {
     const index = cards.value.findIndex((c) => {
-      return c.oracle_id === selectedCard.value.oracle_id;
+      return c.oracle_id === selectedCard.value?.oracle_id;
     });
 
-    cards.value.splice(index, 1, selectedCard.value);
+    if (selectedCard.value) cards.value.splice(index, 1, selectedCard.value);
   };
   const updateCards = (cards: Ref<Scry.Card[]>) => (value: Scry.Card[]) => {
     cards.value = [...value];
@@ -27,7 +27,8 @@ export const useCards = () => {
     cardNames.value = [...value];
   };
   const selectCard =
-    (selectedCard: Ref<Scry.Card>) => (value: Readonly<Scry.Card>) => {
+    (selectedCard: Ref<Scry.Card | undefined>) =>
+    (value: Readonly<Scry.Card> | undefined) => {
       if (value !== undefined) {
         selectedCard.value = { ...value } as Scry.Card;
       } else {
