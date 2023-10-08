@@ -18,10 +18,14 @@
       />
     </div>
     <div v-if="cards.length !== 0" class="flex justify-center mt-8">
-      <ExtendedFab class="flex items-center" @click="download">
-        <IconDownloadRounded color="#29535E" width="24" height="24" />
+      <UButton
+        @click="download"
+        class="fixed bottom-4 right-4"
+        size="md"
+        icon="i-material-symbols-download-rounded"
+      >
         <span class="font-bold">Download</span>
-      </ExtendedFab>
+      </UButton>
     </div>
 
     <ScryModal v-model="isDisplayModalRef" />
@@ -30,11 +34,10 @@
 
 <script setup lang="ts">
 import * as Scry from "scryfall-sdk";
-import IconDownloadRounded from "~icons/material-symbols/download-rounded";
 
 const ScryCard = resolveComponent("ScryCard");
 const ScryModal = resolveComponent("ScryModal");
-const ExtendedFab = resolveComponent("form/button/ExtendedFab");
+
 const SibdAlerts = resolveComponent("SibdAlerts");
 
 const { cards, cardNames, selectedCard, addCard, updateCards, selectCard } =
