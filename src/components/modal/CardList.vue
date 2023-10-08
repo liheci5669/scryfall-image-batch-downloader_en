@@ -6,7 +6,7 @@
       v-for="card in cards"
       :key="card.id"
       class="text-center cursor-pointer"
-      :class="[card.id === selectedCard.id ? 'opacity-100' : 'opacity-50']"
+      :class="[card.id === selectedCard?.id ? 'opacity-100' : 'opacity-50']"
       @click="emit('selectCard', card)"
     >
       <ScryCard :card="card" />
@@ -18,10 +18,10 @@ import * as Scry from "scryfall-sdk";
 
 const props = defineProps<{
   cards: Scry.Card[];
-  selectedCard: Scry.Card;
+  selectedCard: Scry.Card | undefined;
 }>();
 
 const emit = defineEmits<{
-  (e: "selectCard", card: Scry.Card);
+  (e: "selectCard", card: Scry.Card): void;
 }>();
 </script>

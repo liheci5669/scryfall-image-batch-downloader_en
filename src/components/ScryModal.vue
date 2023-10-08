@@ -1,114 +1,100 @@
 <template>
-  <div
-    id="defaultModal"
-    tabindex="-1"
-    aria-hidden="true"
-    class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex items-center justify-center bg-gray-500 bg-opacity-75"
-    v-if="selectedCard !== undefined"
-  >
-    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-      <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <!-- Modal header -->
-        <div
-          class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600"
+  <UModal v-model="isDisplayRef">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <!-- Modal header -->
+      <div
+        class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600"
+      >
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+          {{ selectedCard?.name }}
+        </h3>
+        <button
+          type="button"
+          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          @click="unset"
         >
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-            {{ selectedCard.name }}
-          </h3>
-          <button
-            type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-            @click="unset"
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              aria-hidden="true"
-              class="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-            <span class="sr-only">Close modal</span>
-          </button>
-        </div>
-        <!-- Modal body -->
-        <div class="flex justify-center border-b border-gray-200">
-          <img
-            :src="getImageUris(selectedCard as Scry.Card).large"
-            :title="selectedCard.name"
-            class="inline-block p-4 max-h-[400px]"
-          />
-        </div>
-        <CardList
-          v-if="usingLangRef === 'ja' && !pendingJa"
-          :cards="searchedCardsJa"
-          :selectedCard="selectedCard"
-          @selectCard="selectCard"
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div
+        class="flex justify-center border-b border-gray-200 dark:border-gray-600"
+      >
+        <img
+          v-if="selectedCard"
+          :src="getImageUris(selectedCard as Scry.Card)?.large"
+          :title="selectedCard?.name"
+          class="inline-block p-4 max-h-[400px]"
         />
-        <CardList
-          v-else-if="usingLangRef === 'en' && !pendingEn"
-          :cards="searchedCardsEn"
-          :selectedCard="selectedCard"
-          @selectCard="selectCard"
-        />
-        <div v-else class="flex items-center justify-center h-60">
-          <ScryLoading />
-        </div>
-        <!-- Modal footer -->
-        <div
-          class="flex flex-col md:flex-row md:justify-between items-center gap-3 p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"
+      </div>
+      <CardSuggestion
+        v-if="selectedCard"
+        @selectCard="selectCard"
+        :usingLangRef="usingLangRef"
+      />
+      <!-- Modal footer -->
+      <div
+        class="flex flex-col md:flex-row md:justify-between items-center gap-3 p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"
+      >
+        <UButton
+          @click="changeLang"
+          size="md"
+          icon="i-material-symbols-language"
         >
-          <FilledButton class="flex items-center gap-1" @click="changeLang">
-            <IconLanguage color="currentColor" />
-            EN<IconSwapHorizRounded color="currentColor" />JP
-          </FilledButton>
-          <div class="flex items-center gap-2">
-            <OutlinedButton @click="unset">Cancel</OutlinedButton>
-            <FilledButton class="flex items-center gap-1" @click="changeCard">
-              <IconSwapVertRounded color="currentColor" />
-              Change Image
-            </FilledButton>
-          </div>
+          EN<UIcon name="i-material-symbols-swap-horiz-rounded" />JP
+        </UButton>
+        <div class="flex items-center gap-2">
+          <UButton @click="unset" size="md" variant="outline">Cancel</UButton>
+          <UButton
+            @click="unset"
+            size="md"
+            icon="i-material-symbols-swap-vert-rounded"
+            >Change Image</UButton
+          >
         </div>
       </div>
     </div>
-  </div>
+  </UModal>
 </template>
 <script setup lang="ts">
 import * as Scry from "scryfall-sdk";
-import IconLanguage from "~icons/material-symbols/language";
-import IconSwapHorizRounded from "~icons/material-symbols/swap-horiz-rounded";
-import IconSwapVertRounded from "~icons/material-symbols/swap-vert-rounded";
 
-const ScryCard = resolveComponent("ScryCard");
-const ScryLoading = resolveComponent("ScryLoading");
-const CardList = resolveComponent("modal/CardList");
-const FilledButton = resolveComponent("form/button/FilledButton");
-const OutlinedButton = resolveComponent("form/button/OutlinedButton");
+const CardSuggestion = resolveComponent("modal/CardSuggestion");
 
 const { selectedCard, selectCard, updateCardsWithSelectedCard } = useCards();
 
 const usingLangRef = ref<string>("ja");
 
-const { pending: pendingJa, data: searchedCardsJa } = await useLazyFetch(
-  `/api/cards/search/prints?id=${selectedCard.value.oracle_id}&lang=ja`,
-  {
-    initialCache: false,
-  }
-);
+const props = defineProps<{
+  modelValue: boolean;
+}>();
 
-const { pending: pendingEn, data: searchedCardsEn } = await useLazyFetch(
-  `/api/cards/search/prints?id=${selectedCard.value.oracle_id}&lang=en`,
-  {
-    initialCache: false,
-  }
-);
+const emit = defineEmits<{
+  (e: "update:modelValue", isDisplay: boolean): void;
+}>();
+
+const isDisplayRef = computed({
+  get(): boolean {
+    return props.modelValue;
+  },
+  set(value: boolean) {
+    emit("update:modelValue", value);
+  },
+});
 
 const changeLang = () => {
   if (usingLangRef.value === "ja") {
@@ -124,7 +110,7 @@ const changeCard = () => {
 };
 
 const unset = () => {
-  selectCard(undefined);
+  isDisplayRef.value = false;
 };
 
 const getImageUris = (card: Scry.Card) => {

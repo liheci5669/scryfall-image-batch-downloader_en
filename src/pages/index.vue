@@ -3,33 +3,34 @@
     <section
       class="flex flex-col gap-5 items-center justify-center h-full mt-[-48px]"
     >
-      <SibdTextarea
+      <UTextarea
         v-model="cardsStringRef"
+        variant="outline"
+        size="xl"
+        :rows="10"
+        resize
         placeholder="1 Kenrith, the Returned King
 1 Archivist of Oghma
 1 Avacyn's Pilgrim
 1 Biomancer's Familiar
 ..."
-        class="w-2/3 md:w-1/3 h-[500px]"
       />
-      <FilledButton
+      <UButton
         @click="toSelect"
+        icon="i-material-symbols-image-search-rounded"
+        size="xl"
+        color="primary"
+        variant="solid"
+        label="Search"
+        :trailing="false"
         :disabled="!canStart"
-        class="flex items-center gap-1 text-lg mt-2"
-      >
-        <ImageSearchRounded color="currentcolor" width="24" height="24" />
-        Search
-      </FilledButton>
+      />
     </section>
   </main>
 </template>
 
 <script setup lang="ts">
 import * as Scry from "scryfall-sdk";
-import ImageSearchRounded from "~icons/material-symbols/image-search-rounded";
-
-const SibdTextarea = resolveComponent("form/SibdTextarea");
-const FilledButton = resolveComponent("form/button/FilledButton");
 
 const { cards, updateCardNames } = useCards();
 
@@ -49,7 +50,10 @@ const cardNamesRef = computed(() => {
   const tempArray = cardsStringRef.value.split("\n");
 
   if (tempArray.every((t) => /\d+ (.*)/.test(t))) {
-    return tempArray.map((t) => t.match(/\d+ (.*)/)[1]);
+    return tempArray.map((t) => {
+      const matchedNames = t.match(/\d+ (.*)/);
+      return matchedNames ? matchedNames[1] : "";
+    });
   } else {
     return [];
   }

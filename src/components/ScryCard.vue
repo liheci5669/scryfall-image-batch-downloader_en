@@ -1,6 +1,6 @@
 <template>
   <section>
-    <transition enter-active-class="animate-animated animate-fadeInLeft">
+    <transition enter-active-class="animate-in slide-in-from-left fade-in">
       <div v-show="!isLoadingRef">
         <img
           :src="getImageUris(card as Scry.Card)?.large"
@@ -35,6 +35,6 @@ const getImageUris = (card: Scry.Card) => {
 };
 
 const emit = defineEmits<{
-  (e: "click");
+  (e: "click"): void;
 }>();
 </script>
