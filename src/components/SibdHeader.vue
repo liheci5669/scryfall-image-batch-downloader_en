@@ -14,6 +14,7 @@
         <nuxt-link
           to="https://github.com/kintsuba/scryfall-image-batch-downloader"
           class="p-2 flex items-center hover:bg-primary-700"
+          target="_blank"
         >
           <IconGitHub color="currentcolor" width="28" height="28" />
           <span class="pl-1 text-lg hidden md:inline"> Repository </span>

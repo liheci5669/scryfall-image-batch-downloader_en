@@ -42,9 +42,12 @@
         <p>両面カードが存在します。</p>
         <ul class="mt-2 list-disc" v-for="card in doubleFacedCards">
           <li>
-            <a :href="card.scryfall_uri" class="link:text-pink-400">{{
-              card.name
-            }}</a>
+            <a
+              :href="card.scryfall_uri"
+              target="_blank"
+              class="link:text-pink-400"
+              >{{ card.name }}</a
+            >
           </li>
         </ul>
       </SibdAlert>
