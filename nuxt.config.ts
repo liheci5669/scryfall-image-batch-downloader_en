@@ -2,6 +2,6 @@
 export default defineNuxtConfig({
   ssr: true,
   srcDir: "src/",
-  modules: ["unplugin-icons/nuxt", "@nuxt/ui"],
+  modules: ["@nuxt/ui"],
   ui: { global: true, icons: ["material-symbols", "mdi"] },
 });
