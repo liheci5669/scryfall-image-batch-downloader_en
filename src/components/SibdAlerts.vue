@@ -2,7 +2,6 @@
   <UContainer>
     <transition-group
       enter-active-class="animate-in zoom-in duration-700"
-      leave-active-class="animate-out zoom-out duration-500"
       move-class="animate-in duration-700"
       class="my-4 flex flex-col gap-4"
       tag="div"
