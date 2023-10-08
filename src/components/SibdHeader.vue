@@ -16,13 +16,10 @@
           class="p-2 flex items-center hover:bg-primary-600"
           target="_blank"
         >
-          <IconGitHub color="currentcolor" width="28" height="28" />
-          <span class="pl-1 text-lg hidden md:inline"> Repository </span>
+          <UIcon name="i-mdi-github" class="text-2xl" />
+          <span class="pl-1 text-lg hidden md:inline">Repository </span>
         </nuxt-link>
       </div>
     </div>
   </header>
 </template>
-<script setup lang="ts">
-import IconGitHub from "~icons/mdi/github";
-</script>
