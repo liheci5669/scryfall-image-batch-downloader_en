@@ -1,54 +1,6 @@
 <template>
   <main>
-    <transition-group
-      enter-active-class="animate-animated animate-bounceIn"
-      move-class="animate-animated"
-      class="flex flex-col w-full items-center mt-4"
-      tag="div"
-    >
-      <SibdAlert
-        v-if="isLoadingRef"
-        type="info"
-        class="my-4 mx-2"
-        key="isLoading"
-      >
-        <p>Now Loading: {{ cards.length }} / {{ cardNames.length }}</p>
-      </SibdAlert>
-      <SibdAlert
-        v-if="!isLoadingRef && errorCardNames.length === 0"
-        type="success"
-        class="my-4 mx-2"
-        key="isSuccess"
-      >
-        <p>Loading Complete: {{ cards.length }}</p>
-      </SibdAlert>
-      <SibdAlert
-        v-if="cards.length !== 0 && errorCardNames.length !== 0"
-        type="warning"
-        class="my-4 mx-2"
-        key="isNotDownloaded"
-      >
-        <p>以下のファイルがダウンロードできませんでした。</p>
-        <ul class="mt-2 list-disc" v-for="name in errorCardNames" key="name">
-          <li>{{ name }}</li>
-        </ul>
-      </SibdAlert>
-      <SibdAlert
-        v-if="doubleFacedCards.length > 0"
-        type="info"
-        class="my-4 mx-2"
-        key="doubleFacedCardExists"
-      >
-        <p>両面カードが存在します。</p>
-        <ul class="mt-2 list-disc" v-for="card in doubleFacedCards">
-          <li>
-            <a :href="card.scryfall_uri" class="link:text-pink-400">{{
-              card.name
-            }}</a>
-          </li>
-        </ul>
-      </SibdAlert>
-    </transition-group>
+    <SibdAlerts :isLoading="isLoadingRef" :errorCardNames="errorCardNames" />
 
     <div
       v-if="cards.length !== 0"
@@ -83,7 +35,7 @@ import IconDownloadRounded from "~icons/material-symbols/download-rounded";
 const ScryCard = resolveComponent("ScryCard");
 const ScryModal = resolveComponent("ScryModal");
 const ExtendedFab = resolveComponent("form/button/ExtendedFab");
-const SibdAlert = resolveComponent("util/SibdAlert");
+const SibdAlerts = resolveComponent("SibdAlerts");
 
 const { cards, cardNames, selectedCard, addCard, updateCards, selectCard } =
   useCards();
@@ -106,14 +58,6 @@ onMounted(async () => {
     }
   }
   isLoadingRef.value = false;
-});
-
-const doubleFacedCards = computed(() => {
-  if (cards.value.length === 0) return [];
-
-  return cards.value.filter(
-    (c) => c.card_faces.length >= 2 && c.card_faces[0].image_uris
-  );
 });
 
 const getImageUris = (card: Scry.Card) => {
