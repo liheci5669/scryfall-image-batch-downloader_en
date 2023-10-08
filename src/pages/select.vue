@@ -59,7 +59,10 @@
         :key="card.id"
         :card="(card as Readonly<Scry.Card>)"
         class="cursor-pointer"
-        @click="selectCard(card as Readonly<Scry.Card>)"
+        @click="
+          selectCard(card as Readonly<Scry.Card>);
+          isDisplayModalRef = true;
+        "
       />
     </div>
     <div v-if="cards.length !== 0" class="flex justify-center mt-8">
@@ -68,12 +71,8 @@
         <span class="font-bold">Download</span>
       </ExtendedFab>
     </div>
-    <transition
-      enter-active-class="animate-animated animate-fadeIn"
-      leave-active-class="animate-animated animate-fadeOut"
-    >
-      <ScryModal v-if="isDisplayModalRef" />
-    </transition>
+
+    <ScryModal v-model="isDisplayModalRef" />
   </main>
 </template>
 
@@ -90,7 +89,7 @@ const { cards, cardNames, selectedCard, addCard, updateCards, selectCard } =
   useCards();
 
 const errorCardNames = ref<string[]>([]);
-const isDisplayModalRef = computed(() => selectedCard.value !== undefined);
+const isDisplayModalRef = ref<boolean>(false);
 const isLoadingRef = ref<boolean>(true);
 
 onMounted(async () => {
@@ -131,7 +130,7 @@ const download = async () => {
       $fetch("/api/download", {
         method: "POST",
         body: {
-          url: getImageUris(card as Scry.Card).large,
+          url: getImageUris(card as Scry.Card)?.large,
         },
         initialCache: false,
         responseType: "blob",
