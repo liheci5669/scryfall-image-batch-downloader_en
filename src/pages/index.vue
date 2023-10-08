@@ -31,10 +31,6 @@
 
 <script setup lang="ts">
 import * as Scry from "scryfall-sdk";
-import ImageSearchRounded from "~icons/material-symbols/image-search-rounded";
-
-const SibdTextarea = resolveComponent("form/SibdTextarea");
-const FilledButton = resolveComponent("form/button/FilledButton");
 
 const { cards, updateCardNames } = useCards();
 
