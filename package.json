@@ -15,6 +15,7 @@
     "got": "^13.0.0",
     "nuxt": "^3.7.4",
     "scryfall-sdk": "^4.1.1",
+    "tailwindcss-animate": "^1.0.7",
     "unplugin-icons": "^0.17.0"
   },
   "resolutions": {

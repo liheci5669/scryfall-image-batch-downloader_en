@@ -1,6 +1,6 @@
 <template>
   <section>
-    <transition enter-active-class="animate-animated animate-fadeInLeft">
+    <transition enter-active-class="animate-in slide-in-from-left fade-in">
       <div v-show="!isLoadingRef">
         <img
           :src="getImageUris(card as Scry.Card)?.large"
