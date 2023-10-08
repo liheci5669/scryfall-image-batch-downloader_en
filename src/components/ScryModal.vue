@@ -31,7 +31,9 @@
         </button>
       </div>
       <!-- Modal body -->
-      <div class="flex justify-center border-b border-gray-200">
+      <div
+        class="flex justify-center border-b border-gray-200 dark:border-gray-600"
+      >
         <img
           v-if="selectedCard"
           :src="getImageUris(selectedCard as Scry.Card)?.large"
@@ -48,16 +50,21 @@
       <div
         class="flex flex-col md:flex-row md:justify-between items-center gap-3 p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"
       >
-        <FilledButton class="flex items-center gap-1" @click="changeLang">
-          <IconLanguage color="currentColor" />
-          EN<IconSwapHorizRounded color="currentColor" />JP
-        </FilledButton>
+        <UButton
+          @click="changeLang"
+          size="md"
+          icon="i-material-symbols-language"
+        >
+          EN<UIcon name="i-material-symbols-swap-horiz-rounded" />JP
+        </UButton>
         <div class="flex items-center gap-2">
-          <OutlinedButton @click="unset">Cancel</OutlinedButton>
-          <FilledButton class="flex items-center gap-1" @click="changeCard">
-            <IconSwapVertRounded color="currentColor" />
-            Change Image
-          </FilledButton>
+          <UButton @click="unset" size="md" variant="outline">Cancel</UButton>
+          <UButton
+            @click="unset"
+            size="md"
+            icon="i-material-symbols-swap-vert-rounded"
+            >Change Image</UButton
+          >
         </div>
       </div>
     </div>
@@ -65,13 +72,8 @@
 </template>
 <script setup lang="ts">
 import * as Scry from "scryfall-sdk";
-import IconLanguage from "~icons/material-symbols/language";
-import IconSwapHorizRounded from "~icons/material-symbols/swap-horiz-rounded";
-import IconSwapVertRounded from "~icons/material-symbols/swap-vert-rounded";
 
 const CardSuggestion = resolveComponent("modal/CardSuggestion");
-const FilledButton = resolveComponent("form/button/FilledButton");
-const OutlinedButton = resolveComponent("form/button/OutlinedButton");
 
 const { selectedCard, selectCard, updateCardsWithSelectedCard } = useCards();
 
