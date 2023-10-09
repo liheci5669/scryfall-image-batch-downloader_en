@@ -60,7 +60,7 @@
         <div class="flex items-center gap-2">
           <UButton @click="unset" size="md" variant="outline">Cancel</UButton>
           <UButton
-            @click="unset"
+            @click="changeCard"
             size="md"
             icon="i-material-symbols-swap-vert-rounded"
             >Change Image</UButton
