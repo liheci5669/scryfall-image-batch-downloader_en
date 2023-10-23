@@ -30,8 +30,8 @@ devDependencies:
     specifier: ^3.7.4
     version: 3.7.4
   scryfall-sdk:
-    specifier: ^4.1.1
-    version: 4.1.1
+    specifier: ^4.2.0
+    version: 4.2.0
   tailwindcss-animate:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.3.3)
@@ -5571,8 +5571,8 @@ packages:
       ajv-keywords: 3.5.2(ajv@6.12.6)
     dev: true
 
-  /scryfall-sdk@4.1.1:
-    resolution: {integrity: sha512-XVCxvO0X8Bav6v4Rj62P58SekHiFc3cHEle79iT5jZw7nhsHK0jPkhaZoG9V0t1GdpyYet4ET131OnsMjpqEeA==}
+  /scryfall-sdk@4.2.0:
+    resolution: {integrity: sha512-ADWeGDNpC+Sqp417CODcwJPLymP6YFrSnh6PGuMn0z7cEadrwFz8TA23Ofl3aFMJrKRNklSWJ+ThawgDNp0AQA==}
     dev: true
 
   /scule@1.0.0:

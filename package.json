@@ -13,7 +13,7 @@
     "@windicss/plugin-animations": "^1.0.9",
     "got": "^13.0.0",
     "nuxt": "^3.7.4",
-    "scryfall-sdk": "^4.1.1",
+    "scryfall-sdk": "^4.2.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "resolutions": {
