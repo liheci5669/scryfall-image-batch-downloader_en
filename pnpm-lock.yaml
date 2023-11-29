@@ -10,8 +10,8 @@ overrides:
 
 dependencies:
   '@iconify/json':
-    specifier: ^2.2.125
-    version: 2.2.125
+    specifier: ^2.2.149
+    version: 2.2.149
 
 devDependencies:
   '@nuxt/ui':
@@ -830,8 +830,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify/json@2.2.125:
-    resolution: {integrity: sha512-FtazQikTTUrM4OvaLtzu+yi8htSf1nnjsHJ7SAR501i4o2b+OcvUmjaBJ1Z6DzfoAyHXuDkuF+mjEeLy64F3wg==}
+  /@iconify/json@2.2.149:
+    resolution: {integrity: sha512-fGFitEzqp02PtmmYq30PpAHwf9d4WIOf9j7tOHY8N3vmqY84/oleadLwVu32czCOs+Ss5Usj1oKSgA69M1O4Aw==}
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.1
