@@ -21,6 +21,6 @@
     "json5": "^2.2.2"
   },
   "dependencies": {
-    "@iconify/json": "^2.2.125"
+    "@iconify/json": "^2.2.154"
   }
 }
