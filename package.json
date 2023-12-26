@@ -12,7 +12,7 @@
     "@types/got": "^9.6.12",
     "@windicss/plugin-animations": "^1.0.9",
     "got": "^13.0.0",
-    "nuxt": "^3.7.4",
+    "nuxt": "^3.9.0",
     "scryfall-sdk": "^4.1.1",
     "tailwindcss-animate": "^1.0.7"
   },
