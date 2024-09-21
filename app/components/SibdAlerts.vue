@@ -106,7 +106,7 @@ const doubleFacedCards = computed(() => {
   if (cards.value.length === 0) return [];
 
   return cards.value.filter(
-    (c) => c.card_faces.length >= 2 && c.card_faces[0].image_uris
+    (c) => c.card_faces.length >= 2 && c.card_faces[0]?.image_uris
   );
 });
 </script>

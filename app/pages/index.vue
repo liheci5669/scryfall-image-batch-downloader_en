@@ -53,7 +53,7 @@ const cardNamesRef = computed(() => {
     return tempArray.map((t) => {
       const matchedNames = t.match(/\d+ (.*)/);
       return matchedNames ? matchedNames[1] : "";
-    });
+    }) as string[];
   } else {
     return [];
   }

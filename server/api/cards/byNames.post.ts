@@ -8,6 +8,8 @@ export default defineEventHandler(async (event) => {
   const jaCards: Scry.Card[] = [];
   const errorCardNames: string[] = [];
 
+  Scry.setAgent("Scryfall Image Batch Downloader", "1.0.0");
+
   for (const name of cardNames) {
     console.log(`Fetching: ${name}`);
 

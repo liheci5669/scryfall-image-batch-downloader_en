@@ -25,7 +25,7 @@ const props = defineProps<{
 }>();
 
 const getImageUris = (card: Scry.Card) => {
-  if (card.card_faces.length >= 2 && card.card_faces[0].image_uris) {
+  if (card.card_faces.length >= 2 && card.card_faces[0]?.image_uris) {
     return card.card_faces[0].image_uris;
   } else if (card.image_uris) {
     return card.image_uris;
