@@ -11,9 +11,9 @@
     "@nuxt/ui": "^2.9.0",
     "@types/got": "^9.6.12",
     "@windicss/plugin-animations": "^1.0.9",
-    "got": "^13.0.0",
+    "got": "^14.4.2",
     "nuxt": "^3.13.2",
-    "scryfall-sdk": "^4.1.1",
+    "scryfall-sdk": "^5.0.2",
     "tailwindcss-animate": "^1.0.7"
   },
   "resolutions": {
