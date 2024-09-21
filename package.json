@@ -8,6 +8,8 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "@iconify-json/material-symbols": "^1.2.1",
+    "@iconify-json/mdi": "^1.2.0",
     "@nuxt/ui": "^2.9.0",
     "@types/got": "^9.6.12",
     "@windicss/plugin-animations": "^1.0.9",
@@ -21,7 +23,6 @@
     "json5": "^2.2.2"
   },
   "dependencies": {
-    "@iconify/json": "^2.2.125",
     "sharp": "^0.33.5"
   }
 }
