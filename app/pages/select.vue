@@ -75,13 +75,15 @@ const download = async () => {
   let remainingCardLength = cards.value.length;
   let index = 0;
 
-  // 69枚ごとに処理する
+  const stackSize = 30;
+
+  // stackSizeごとに処理する
   while (remainingCardLength > 0) {
-    const start = index * 70;
+    const start = index * (stackSize + 1);
     const end =
-      remainingCardLength <= 69
-        ? remainingCardLength + index * 70
-        : 69 + index * 70;
+      remainingCardLength <= stackSize
+        ? remainingCardLength + index * (stackSize + 1)
+        : stackSize + index * (stackSize + 1);
 
     const targetCards = cards.value.slice(start, end);
 
@@ -113,7 +115,7 @@ const download = async () => {
     isDownloadingRef.value = false;
 
     index++;
-    remainingCardLength -= 69;
+    remainingCardLength -= stackSize;
   }
 };
 </script>
