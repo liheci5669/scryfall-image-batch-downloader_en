@@ -96,6 +96,7 @@ const download = async () => {
               (card) => getImageUris(card as Scry.Card)?.large
             ),
           },
+          timeout: 600000,
           initialCache: false,
           responseType: "blob",
         })
