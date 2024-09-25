@@ -1,5 +1,5 @@
 # DISCLAIMER
-This project was originally by kintsuba, it's not mine. I have cloned it in the hopes of modifying the code to have English be the default language and host the result in Github pages, which may or may not work.
+This project was originally by kintsuba, it's not mine. I have cloned it in the hopes of modifying the code to have English be the default language and host the result in Github pages, which will most likely not work, since I have very little idea of what I'm doing.
 
 Original project and repository: https://github.com/kintsuba/scryfall-image-batch-downloader
 
