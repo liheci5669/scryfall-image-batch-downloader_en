@@ -1,5 +1,6 @@
 # DISCLAIMER
-This project is originally from kitsuba, not mine. I have cloned it in the hopes of modifying the code to have English be the default language.
+This project was originally by kintsuba, it's not mine. I have cloned it in the hopes of modifying the code to have English be the default language and host the result in Github pages, which may or may not work.
+Original project and repository: https://github.com/kintsuba/scryfall-image-batch-downloader
 
 # Scryfall Image Batch Downloader
 
