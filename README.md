@@ -3,6 +3,8 @@ This project was originally by kintsuba, it's not mine. I have cloned it in the 
 
 Original project and repository: https://github.com/kintsuba/scryfall-image-batch-downloader
 
+UPDATE: Didn't work, it's a static page and thus you can't search the cards. It was worth an attempt though.
+
 # Scryfall Image Batch Downloader
 
 Scryfall Image Batch Downloader(SIBD) provides an easy and straightforward way to download images from Scryfall in batches for any card.
