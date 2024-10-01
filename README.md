@@ -1,8 +1,3 @@
-# DISCLAIMER
-This project was originally by kintsuba, it's not mine. I have cloned it in the hopes of modifying the code to have English be the default language and host the result in Github pages, which will most likely not work, since I have very little idea of what I'm doing.
-
-Original project and repository: https://github.com/kintsuba/scryfall-image-batch-downloader
-
 # Scryfall Image Batch Downloader
 
 Scryfall Image Batch Downloader(SIBD) provides an easy and straightforward way to download images from Scryfall in batches for any card.

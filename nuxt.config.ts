@@ -1,22 +1,8 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  future: {
-    compatibilityVersion: 4,
-  },
-  compatibilityDate: "2024-09-21",
-
-  experimental: {
-    sharedPrerenderData: false,
-    resetAsyncDataToUndefined: true,
-    defaults: {
-      useAsyncData: {
-        deep: true,
-        value: "null",
-        errorValue: "null",
-      },
-    },
-  },
-
+  ssr: true,
+  srcDir: "src/",
   modules: ["@nuxt/ui"],
-  ui: { global: true },
+  ui: { global: true, icons: ["material-symbols", "mdi"] },
+  compatibilityDate: "2024-09-25",
 });
