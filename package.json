@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@iconify-json/material-symbols": "^1.2.1",
-    "@iconify-json/mdi": "^1.2.0",
+    "@iconify-json/mdi": "^1.2.1",
     "@nuxt/ui": "^2.9.0",
     "@types/got": "^9.6.12",
     "@windicss/plugin-animations": "^1.0.9",
